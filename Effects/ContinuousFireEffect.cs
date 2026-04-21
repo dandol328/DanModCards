@@ -8,8 +8,11 @@ namespace DanModCards.Effects
     /// </summary>
     public class ContinuousFireEffect : MonoBehaviour
     {
+        // Caps the computed interval at 2000 shots/sec so stacked fire-rate boosts stay responsive without runaway loops.
         private const float MinimumFireInterval = 0.0005f;
+        // Prevents a long frame hitch from spawning an unbounded number of attacks in one Update.
         private const int MaxShotsPerFrame = 256;
+        private const float MinimumAttackSpeedMultiplier = 0.01f;
 
         private Gun gun;
         private float fireTimer;
@@ -33,7 +36,7 @@ namespace DanModCards.Effects
             int shotsThisFrame = 0;
             while (fireTimer >= fireInterval && shotsThisFrame < MaxShotsPerFrame)
             {
-                // Force the attack because Gun.sinceAttack only advances once per frame, which otherwise caps rapid-fire cards.
+                // charge=0f fires an instant shot, and forceAttack=true bypasses Gun.sinceAttack because it only advances once per frame.
                 if (!gun.Attack(0f, true))
                 {
                     fireTimer = Mathf.Min(fireTimer, fireInterval);
@@ -58,7 +61,7 @@ namespace DanModCards.Effects
             }
 
             float cooldown = gun.lockGunToDefault ? gun.defaultCooldown : gun.attackSpeed;
-            float attackSpeedMultiplier = Mathf.Max(gun.attackSpeedMultiplier, Mathf.Epsilon);
+            float attackSpeedMultiplier = Mathf.Max(gun.attackSpeedMultiplier, MinimumAttackSpeedMultiplier);
             return Mathf.Max(cooldown / attackSpeedMultiplier, MinimumFireInterval);
         }
 
