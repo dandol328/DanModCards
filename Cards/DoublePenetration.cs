@@ -63,9 +63,8 @@ namespace DanModCards.Cards
             HealthHandler health, Gravity gravity, Block block,
             CharacterStatModifiers characterStats)
         {
-            gun.burst     += 2;
-            gun.burstWait += 0.1f;
-            gun.reflects  += 4;
+            gun.numberOfProjectiles += 2;
+            gun.reflects            += 4;
         }
 
         public override void OnRemoveCard(
@@ -73,9 +72,8 @@ namespace DanModCards.Cards
             HealthHandler health, Gravity gravity, Block block,
             CharacterStatModifiers characterStats)
         {
-            gun.burst     -= 2;
-            gun.burstWait -= 0.1f;
-            gun.reflects  -= 4;
+            gun.numberOfProjectiles -= 2;
+            gun.reflects            -= 4;
         }
     }
 }
