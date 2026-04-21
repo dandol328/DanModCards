@@ -1,3 +1,4 @@
+using DanModCards.Effects;
 using UnboundLib.Cards;
 using UnityEngine;
 
@@ -55,6 +56,7 @@ namespace DanModCards.Cards
             CharacterStatModifiers characterStats)
         {
             gunAmmo.maxAmmo += 36;
+            gun.gameObject.AddComponent<ContinuousFireEffect>();
         }
 
         public override void OnRemoveCard(
@@ -62,6 +64,9 @@ namespace DanModCards.Cards
             HealthHandler health, Gravity gravity, Block block,
             CharacterStatModifiers characterStats)
         {
+            var effect = gun.gameObject.GetComponent<ContinuousFireEffect>();
+            if (effect != null)
+                Destroy(effect);
         }
     }
 }
