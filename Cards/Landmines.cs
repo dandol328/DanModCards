@@ -24,7 +24,7 @@ namespace DanModCards.Cards
             {
                 positive       = false,
                 stat           = "Bullet Speed",
-                amount         = "-100%",
+                amount         = "-80%",
                 simepleAmount  = CardInfoStat.SimpleAmount.notAssigned,
             },
             new CardInfoStat
@@ -46,7 +46,7 @@ namespace DanModCards.Cards
             CharacterStatModifiers statModifiers, Block block)
         {
             gun.gravity          *= 0.0f;
-            gun.projectileSpeed  *= 0.0f;
+            gun.projectileSpeed  *= 0.2f;
             gun.damage           *= 5.0f;
         }
 
