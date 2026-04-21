@@ -21,9 +21,7 @@ namespace DanModCards.Effects
 
         private void Update()
         {
-            if (gun == null) return;
-
-            if (!Input.GetMouseButton(0) || gun.isReloading)
+            if (gun == null || !Input.GetMouseButton(0) || gun.isReloading)
             {
                 fireTimer = 0f;
                 return;
@@ -35,6 +33,7 @@ namespace DanModCards.Effects
             int shotsThisFrame = 0;
             while (fireTimer >= fireInterval && shotsThisFrame < MaxShotsPerFrame)
             {
+                // Force the attack because Gun.sinceAttack only advances once per frame, which otherwise caps rapid-fire cards.
                 if (!gun.Attack(0f, true))
                 {
                     fireTimer = Mathf.Min(fireTimer, fireInterval);
@@ -53,6 +52,11 @@ namespace DanModCards.Effects
 
         private float GetFireInterval()
         {
+            if (gun == null)
+            {
+                return MinimumFireInterval;
+            }
+
             float cooldown = gun.lockGunToDefault ? gun.defaultCooldown : gun.attackSpeed;
             float attackSpeedMultiplier = Mathf.Max(gun.attackSpeedMultiplier, Mathf.Epsilon);
             return Mathf.Max(cooldown / attackSpeedMultiplier, MinimumFireInterval);
