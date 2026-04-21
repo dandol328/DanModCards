@@ -11,11 +11,11 @@
   <!-- BepInEx core references -->
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>$(ROUNDS_INSTALL_PATH)\BepInEx\core\0Harmony.dll</HintPath>
+      <HintPath>/home/dan/.config/r2modmanPlus-local/ROUNDS/profiles/Stock/BepInEx/core/0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="BepInEx">
-      <HintPath>$(ROUNDS_INSTALL_PATH)\BepInEx\core\BepInEx.dll</HintPath>
+      <HintPath>/home/dan/.config/r2modmanPlus-local/ROUNDS/profiles/Stock/BepInEx/core/BepInEx.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -23,15 +23,15 @@
   <!-- Unity engine references -->
   <ItemGroup>
     <Reference Include="UnityEngine">
-      <HintPath>$(ROUNDS_INSTALL_PATH)\ROUNDS_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>/home/dan/.steam/steam/steamapps/common/ROUNDS/ROUNDS_Data/Managed/UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>$(ROUNDS_INSTALL_PATH)\ROUNDS_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>/home/dan/.steam/steam/steamapps/common/ROUNDS/ROUNDS_Data/Managed/UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.Physics2DModule">
-      <HintPath>$(ROUNDS_INSTALL_PATH)\ROUNDS_Data\Managed\UnityEngine.Physics2DModule.dll</HintPath>
+      <HintPath>/home/dan/.steam/steam/steamapps/common/ROUNDS/ROUNDS_Data/Managed/UnityEngine.Physics2DModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -39,15 +39,15 @@
   <!-- ROUNDS game assembly -->
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
-      <HintPath>$(ROUNDS_INSTALL_PATH)\ROUNDS_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>/home/dan/.steam/steam/steamapps/common/ROUNDS/ROUNDS_Data/Managed/Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
 
-  <!-- UnboundLib plugin -->
+  <!-- UnboundLib plugin from r2modmanPlus -->
   <ItemGroup>
     <Reference Include="UnboundLib">
-      <HintPath>$(ROUNDS_INSTALL_PATH)\BepInEx\plugins\UnboundLib\UnboundLib.dll</HintPath>
+      <HintPath>/home/dan/.config/r2modmanPlus-local/ROUNDS/profiles/Stock/BepInEx/plugins/willis81808-UnboundLib/UnboundLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
