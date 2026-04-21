@@ -69,7 +69,6 @@ namespace DanModCards.Cards
             gun.projectileSpeed         *= 7.0f;
             gun.recoilMuiltiplier       *= 2.0f;
             gun.knockback               *= 2.0f;
-            gun.gunAmmo.maxAmmo         -= 2;
             gun.gravity                 *= 0.0f;
             gun.drag                    *= 0.75f;
         }
@@ -79,6 +78,7 @@ namespace DanModCards.Cards
             HealthHandler health, Gravity gravity, Block block,
             CharacterStatModifiers characterStats)
         {
+            gunAmmo.maxAmmo -= 2;
         }
 
         public override void OnRemoveCard(

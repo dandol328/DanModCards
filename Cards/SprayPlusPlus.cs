@@ -47,7 +47,6 @@ namespace DanModCards.Cards
         {
             gun.attackSpeedMultiplier   *= 11.0f;
             gun.damage                  *= 0.25f;
-            gun.gunAmmo.maxAmmo         += 36;
         }
 
         public override void OnAddCard(
@@ -55,6 +54,7 @@ namespace DanModCards.Cards
             HealthHandler health, Gravity gravity, Block block,
             CharacterStatModifiers characterStats)
         {
+            gunAmmo.maxAmmo += 36;
         }
 
         public override void OnRemoveCard(
