@@ -1,93 +1,125 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnboundLib;
 
 namespace DanModCards.Effects
 {
     /// <summary>
-    /// Subscribes to the player's gun and intercepts bullets as they're fired.
-    /// For each bullet, spawns 2 additional bullets recursively up to a maximum of 30 total bullets.
-    /// Secondary bullets deal half damage compared to the original bullet.
+    /// Subscribes to the player's gun and fires extra bullets whenever a bullet is spawned.
+    /// For each bullet fired, spawns 2 additional bullets recursively up to a maximum of 30 total.
+    /// Secondary bullets deal half damage compared to their parent bullet.
     /// </summary>
     public class InfinityMirrorEffect : MonoBehaviour
     {
         private const int MaxBullets = 30;
-        private int bulletCount = 0;
 
         private Gun ownerGun = null!;
+        private GunAmmo ownerGunAmmo = null!;
+
+        private int bulletCount = 0;
+        private bool isSpawningChild = false;
+
+        // Queued damage multipliers for the child bullets we are about to spawn
+        private readonly Queue<float> pendingDamageMultipliers = new Queue<float>();
 
         private void Start()
         {
             ownerGun = GetComponent<Gun>();
-            
-            // Hook into the gun's bullet fire event
+            ownerGunAmmo = GetComponentInChildren<GunAmmo>();
+
             if (ownerGun != null)
             {
-                ownerGun.gunAmmo.OnShoot += OnBulletFired;
+                ownerGun.ShootPojectileAction += OnBulletFired;
             }
         }
 
         private void OnDestroy()
         {
-            if (ownerGun != null && ownerGun.gunAmmo != null)
+            if (ownerGun != null)
             {
-                ownerGun.gunAmmo.OnShoot -= OnBulletFired;
+                ownerGun.ShootPojectileAction -= OnBulletFired;
             }
         }
 
-        /// <summary>Called every time a bullet is fired.</summary>
-        private void OnBulletFired(ProjectileData projectileData)
+        /// <summary>Called every time a bullet is fired by the gun.</summary>
+        private void OnBulletFired(GameObject projectile)
         {
-            // Reset bullet count at the start of each shot
-            bulletCount = 0;
-            SpawnChildBullets(projectileData, 1f);
-        }
-
-        /// <summary>Recursively spawns child bullets up to the maximum limit.</summary>
-        private void SpawnChildBullets(ProjectileData parentBullet, float damageMultiplier)
-        {
-            // Check if we've hit the max bullet cap
-            if (bulletCount >= MaxBullets)
+            if (!isSpawningChild)
             {
+                // Original shot from the player – reset counter for this burst
+                bulletCount = 0;
+                pendingDamageMultipliers.Clear();
+
+                // Schedule 2 child bullets from this original bullet
+                if (bulletCount < MaxBullets)
+                {
+                    StartCoroutine(SpawnChildBullets(0.5f));
+                }
                 return;
             }
 
-            // Spawn 2 child bullets
-            for (int i = 0; i < 2; i++)
+            // Child bullet – apply its queued damage multiplier
+            if (pendingDamageMultipliers.Count > 0)
             {
-                if (bulletCount >= MaxBullets)
+                float damageMultiplier = pendingDamageMultipliers.Dequeue();
+                ProjectileHit hit = projectile.GetComponent<ProjectileHit>();
+                if (hit != null)
                 {
-                    return;
+                    hit.damage *= damageMultiplier;
                 }
 
-                bulletCount++;
-
-                // Create a new projectile data for the child bullet
-                ProjectileData childBullet = new ProjectileData(parentBullet);
-                
-                // Reduce damage by half for secondary bullets
-                childBullet.damage *= damageMultiplier * 0.5f;
-
-                // Slightly vary the direction to avoid perfect overlap
-                Vector3 direction = parentBullet.direction;
-                float angleOffset = (i == 0 ? -15f : 15f); // Spread the child bullets
-                direction = Quaternion.Euler(0, 0, angleOffset) * direction;
-                childBullet.direction = direction;
-
-                // Spawn the child bullet
-                if (ownerGun != null)
+                // Recursively schedule children for this child bullet
+                if (bulletCount < MaxBullets)
                 {
-                    GameObject childBulletObject = Instantiate(parentBullet.gameObject, parentBullet.transform.position, Quaternion.identity);
-                    Projectile childProjectile = childBulletObject.GetComponent<Projectile>();
-                    
-                    if (childProjectile != null)
-                    {
-                        childProjectile.SetData(childBullet);
-                        
-                        // Recursively spawn more bullets from this child
-                        SpawnChildBullets(childBullet, damageMultiplier * 0.5f);
-                    }
+                    StartCoroutine(SpawnChildBullets(damageMultiplier * 0.5f));
                 }
             }
+        }
+
+        /// <summary>Fires 2 child bullets from the owner gun after a single frame delay.</summary>
+        private IEnumerator SpawnChildBullets(float damageMultiplier)
+        {
+            yield return null;
+
+            if (ownerGun == null) yield break;
+
+            int savedProjectiles = ownerGun.numberOfProjectiles;
+            ownerGun.numberOfProjectiles = 1;
+
+            for (int i = 0; i < 2; i++)
+            {
+                if (bulletCount >= MaxBullets) break;
+
+                bulletCount++;
+                pendingDamageMultipliers.Enqueue(damageMultiplier);
+
+                // Rotate in the XY plane (Z-axis) — correct for ROUNDS' 2D side-scrolling space.
+                Vector3 shootDir = ownerGun.transform.forward;
+                float angleOffset = (i == 0) ? -15f : 15f;
+                ownerGun.SetFieldValue("forceShootDir",
+                    Quaternion.Euler(0f, 0f, angleOffset) * shootDir);
+
+                isSpawningChild = true;
+
+                // Save ammo so child bullets do not consume the player's ammo.
+                // Only interact with the ammo system when a GunAmmo component is present.
+                int? savedAmmo = ownerGunAmmo != null
+                    ? (int?)ownerGunAmmo.GetFieldValue("currentAmmo")
+                    : null;
+
+                ownerGun.Attack(0f, true);
+
+                if (savedAmmo.HasValue && ownerGunAmmo != null)
+                    ownerGunAmmo.SetFieldValue("currentAmmo", savedAmmo.Value);
+
+                isSpawningChild = false;
+
+                // Restore direction to default (gun's normal aim)
+                ownerGun.SetFieldValue("forceShootDir", Vector3.zero);
+            }
+
+            ownerGun.numberOfProjectiles = savedProjectiles;
         }
     }
 }
