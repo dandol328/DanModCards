@@ -1,3 +1,4 @@
+using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
 
@@ -64,7 +65,7 @@ namespace DanModCards.Cards
             HealthHandler health, Gravity gravity, Block block,
             CharacterStatModifiers characterStats)
         {
-            gun.pierce += 8;
+            gun.SetFieldValue("pierce", (int)gun.GetFieldValue("pierce") + 8);
         }
 
         public override void OnRemoveCard(
@@ -72,7 +73,7 @@ namespace DanModCards.Cards
             HealthHandler health, Gravity gravity, Block block,
             CharacterStatModifiers characterStats)
         {
-            gun.pierce -= 8;
+            gun.SetFieldValue("pierce", (int)gun.GetFieldValue("pierce") - 8);
         }
     }
 }

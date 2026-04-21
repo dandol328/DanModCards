@@ -1,3 +1,4 @@
+using UnboundLib;
 using UnityEngine;
 
 namespace DanModCards.Effects
@@ -27,7 +28,7 @@ namespace DanModCards.Effects
             }
 
             if (gunAmmo != null)
-                previousAmmo = gunAmmo.currentAmmo;
+                previousAmmo = (int)gunAmmo.GetFieldValue("currentAmmo");
         }
 
         private void Update()
@@ -35,7 +36,7 @@ namespace DanModCards.Effects
             if (gunAmmo == null || healthHandler == null || characterData == null || previousAmmo < 0)
                 return;
 
-            int current = gunAmmo.currentAmmo;
+            int current = (int)gunAmmo.GetFieldValue("currentAmmo");
             if (current < previousAmmo)
             {
                 int shots = previousAmmo - current;
