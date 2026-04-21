@@ -26,19 +26,19 @@ namespace DanModCards.Cards
                 positive = true,
                 stat = "Damage",
                 amount = "+25%",
-                simepleAmount = CardInfoStat.SimpleAmount.increased
+                simepleAmount = CardInfoStat.SimpleAmount.notAssigned
             },
             new CardInfoStat
             {
                 positive = false,
                 stat = "Reload Time",
                 amount = "+50%",
-                simepleAmount = CardInfoStat.SimpleAmount.increased
+                simepleAmount = CardInfoStat.SimpleAmount.notAssigned
             }
         };
 
         protected override CardInfo.Rarity GetRarity() => CardInfo.Rarity.Uncommon;
-        protected override CardThemeColor.CardThemeColorType GetTheme() => CardThemeColor.CardThemeColorType.OffensiveRed;
+        protected override CardThemeColor.CardThemeColorType GetTheme() => CardThemeColor.CardThemeColorType.DestructiveRed;
         protected override GameObject GetCardArt() => null;
         public override string GetModName() => DanModCards.ModInitials;
 
