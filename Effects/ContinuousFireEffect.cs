@@ -8,20 +8,18 @@ namespace DanModCards.Effects
     /// </summary>
     public class ContinuousFireEffect : MonoBehaviour
     {
-        private Gun    gun;
-        private Player player;
+        private Gun gun;
 
         private void Start()
         {
-            gun    = GetComponent<Gun>();
-            player = GetComponentInParent<Player>();
+            gun = GetComponent<Gun>();
         }
 
         private void Update()
         {
-            if (gun == null || player == null) return;
+            if (gun == null) return;
 
-            if (player.data.playerActions.Attack.IsPressed)
+            if (Input.GetMouseButton(0))
             {
                 gun.Attack(0f, false);
             }
