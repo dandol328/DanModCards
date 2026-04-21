@@ -46,7 +46,7 @@ namespace DanModCards.Cards
             CardInfo cardInfo, Gun gun, ApplyCardStats cardStats,
             CharacterStatModifiers statModifiers, Block block)
         {
-            gun.attackSpeedMultiplier   *= 31.0f;
+            gun.attackSpeedMultiplier   *= 80f;
             gun.damage                  *= 0.15f;
         }
 
