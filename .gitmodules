@@ -1,3 +1,6 @@
 [submodule "UnboundLib"]
 	path = UnboundLib
-	url = https://github.com/Rounds-Modding/UnboundLib.git
+	url = https://github.com/Rounds-Modding/UnboundLib
+[submodule "bepinex"]
+	path = bepinex
+	url = https://github.com/bepinex/bepinex
