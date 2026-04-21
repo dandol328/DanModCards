@@ -10,7 +10,7 @@ namespace DanModCards.Cards
     public class SprayPlusPlus : CustomCard
     {
         protected override string GetTitle()       => "Spray++";
-        protected override string GetDescription() => "Spray and pray – fire at blinding speed with tons of ammo, but each bullet hits softer.";
+        protected override string GetDescription() => "Spray and pray – fire at blinding speed with tons of ammo, but each bullet hits softer. Hope she doesn't get pregnant!";
 
         protected override CardInfoStat[] GetStats() => new[]
         {
@@ -18,21 +18,21 @@ namespace DanModCards.Cards
             {
                 positive       = true,
                 stat           = "Attack Speed",
-                amount         = "+1000%",
+                amount         = "+3000%",
                 simepleAmount  = CardInfoStat.SimpleAmount.notAssigned,
             },
             new CardInfoStat
             {
                 positive       = true,
                 stat           = "Ammo",
-                amount         = "+36",
+                amount         = "+69",
                 simepleAmount  = CardInfoStat.SimpleAmount.notAssigned,
             },
             new CardInfoStat
             {
                 positive       = false,
                 stat           = "Damage",
-                amount         = "-75%",
+                amount         = "-85%",
                 simepleAmount  = CardInfoStat.SimpleAmount.notAssigned,
             },
         };
@@ -46,8 +46,8 @@ namespace DanModCards.Cards
             CardInfo cardInfo, Gun gun, ApplyCardStats cardStats,
             CharacterStatModifiers statModifiers, Block block)
         {
-            gun.attackSpeedMultiplier   *= 11.0f;
-            gun.damage                  *= 0.25f;
+            gun.attackSpeedMultiplier   *= 31.0f;
+            gun.damage                  *= 0.15f;
         }
 
         public override void OnAddCard(
@@ -55,7 +55,7 @@ namespace DanModCards.Cards
             HealthHandler health, Gravity gravity, Block block,
             CharacterStatModifiers characterStats)
         {
-            gunAmmo.maxAmmo += 36;
+            gunAmmo.maxAmmo += 69;
             gun.gameObject.AddComponent<ContinuousFireEffect>();
         }
 
