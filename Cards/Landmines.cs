@@ -9,10 +9,11 @@ namespace DanModCards.Cards
     /// </summary>
     public class Landmines : CustomCard
     {
+        private const int BounceCount = 7;
         protected override string GetTitle()       => "Landmines";
         protected override string GetDescription() =>
-            "Fires a huge, lumbering bullet that drifts through walls and can't be blocked. " +
-            "It bounces 7 times and lingers for 30 seconds – a roaming landmine. Don't stand still.";
+            $"Fires a huge, lumbering bullet that drifts through walls and can't be blocked. " +
+            $"It bounces {BounceCount} times and lingers for 30 seconds – a roaming landmine. Don't stand still.";
 
         protected override CardInfoStat[] GetStats() => new[]
         {
@@ -41,7 +42,7 @@ namespace DanModCards.Cards
             {
                 positive       = true,
                 stat           = "Smart Bounces",
-                amount         = "+7",
+                amount         = $"+{BounceCount}",
                 simepleAmount  = CardInfoStat.SimpleAmount.notAssigned,
             },
             new CardInfoStat
@@ -83,7 +84,7 @@ namespace DanModCards.Cards
             gun.destroyBulletAfter   = 30f;     // Stays alive for 30 seconds
             gun.ignoreWalls          = true;    // Phases through walls
             gun.unblockable          = true;    // Cannot be blocked
-            gun.smartBounce          = 7;       // 7 smart bounces (aims toward enemies)
+            gun.smartBounce          = BounceCount;  // smart bounces (aims toward enemies)
         }
 
         public override void OnAddCard(
@@ -91,7 +92,7 @@ namespace DanModCards.Cards
             HealthHandler health, Gravity gravity, Block block,
             CharacterStatModifiers characterStats)
         {
-            gun.reflects += 7;
+            gun.reflects += BounceCount;
         }
 
         public override void OnRemoveCard(
@@ -99,7 +100,7 @@ namespace DanModCards.Cards
             HealthHandler health, Gravity gravity, Block block,
             CharacterStatModifiers characterStats)
         {
-            gun.reflects -= 7;
+            gun.reflects -= BounceCount;
         }
     }
 }
