@@ -30,6 +30,7 @@ namespace DanModCards
             CustomCard.BuildCard<SprayPlusPlus>();
             CustomCard.BuildCard<RailCannon>();
             CustomCard.BuildCard<MegaTank>();
+            CustomCard.BuildCard<Landmines>();
         }
     }
 }
