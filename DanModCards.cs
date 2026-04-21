@@ -26,6 +26,10 @@ namespace DanModCards
             CustomCard.BuildCard<ZoomiesBurst>();
             CustomCard.BuildCard<VictorsMeow>();
             CustomCard.BuildCard<AntiGravity>();
+            CustomCard.BuildCard<InfinityMirror>();
+            CustomCard.BuildCard<SprayPlusPlus>();
+            CustomCard.BuildCard<RailCannon>();
+            CustomCard.BuildCard<MegaTank>();
         }
     }
 }

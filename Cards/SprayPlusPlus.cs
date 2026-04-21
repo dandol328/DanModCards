@@ -4,25 +4,39 @@ using UnityEngine;
 namespace DanModCards.Cards
 {
     /// <summary>
-    /// Anti Gravity – nullifies gravity so the player floats freely through the air.
+    /// Spray Plus Plus – massively increases attack speed and ammo at the cost of damage.
     /// </summary>
-    public class AntiGravity : CustomCard
+    public class SprayPlusPlus : CustomCard
     {
-        protected override string GetTitle()       => "Anti Gravity";
-        protected override string GetDescription() => "Nullifies gravity. You float freely through the air.";
+        protected override string GetTitle()       => "Spray++";
+        protected override string GetDescription() => "Spray and pray – fire at blinding speed with tons of ammo, but each bullet hits softer.";
 
         protected override CardInfoStat[] GetStats() => new[]
         {
             new CardInfoStat
             {
+                positive       = true,
+                stat           = "Attack Speed",
+                amount         = "+1000%",
+                simepleAmount  = CardInfoStat.SimpleAmount.notAssigned,
+            },
+            new CardInfoStat
+            {
+                positive       = true,
+                stat           = "Ammo",
+                amount         = "+36",
+                simepleAmount  = CardInfoStat.SimpleAmount.notAssigned,
+            },
+            new CardInfoStat
+            {
                 positive       = false,
-                stat           = "Character Gravity",
-                amount         = "-100%",
+                stat           = "Damage",
+                amount         = "-75%",
                 simepleAmount  = CardInfoStat.SimpleAmount.notAssigned,
             },
         };
 
-        protected override CardInfo.Rarity GetRarity()                          => CardInfo.Rarity.Rare;
+        protected override CardInfo.Rarity GetRarity()                          => CardInfo.Rarity.Uncommon;
         protected override CardThemeColor.CardThemeColorType GetTheme()         => CardThemeColor.CardThemeColorType.TechWhite;
         protected override GameObject GetCardArt()                              => null;
         public override string GetModName()                                     => DanModCards.ModInitials;
@@ -31,7 +45,9 @@ namespace DanModCards.Cards
             CardInfo cardInfo, Gun gun, ApplyCardStats cardStats,
             CharacterStatModifiers statModifiers, Block block)
         {
-            statModifiers.gravity *= 0.0f;
+            gun.attackSpeedMultiplier   *= 11.0f;
+            gun.damage                  *= 0.25f;
+            gun.gunAmmo.maxAmmo         += 36;
         }
 
         public override void OnAddCard(
