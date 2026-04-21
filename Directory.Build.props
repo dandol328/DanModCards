@@ -1,0 +1,12 @@
+<Project>
+  <PropertyGroup>
+    <!--
+      Set ROUNDS_INSTALL_PATH to your ROUNDS game directory.
+      You can either:
+        a) Set an environment variable: ROUNDS_INSTALL_PATH=C:\Program Files (x86)\Steam\steamapps\common\Rounds
+        b) Override it here directly, e.g.:
+           <ROUNDS_INSTALL_PATH>C:\Program Files (x86)\Steam\steamapps\common\Rounds</ROUNDS_INSTALL_PATH>
+    -->
+    <ROUNDS_INSTALL_PATH Condition="'$(ROUNDS_INSTALL_PATH)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Rounds</ROUNDS_INSTALL_PATH>
+  </PropertyGroup>
+</Project>
