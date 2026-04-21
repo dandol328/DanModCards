@@ -8,43 +8,43 @@ namespace DanModCards.Effects
     /// </summary>
     public class ContinuousFireEffect : MonoBehaviour
     {
-        // Floors the interval at 0.5ms (2000 shots/sec max) so stacked fire-rate boosts stay responsive without runaway loops.
-        private const float MinimumFireInterval = 0.0005f;
-        // Prevents a long frame hitch from spawning an unbounded number of attacks in one Update.
-        private const int MaxShotsPerFrame = 256;
-        // Avoids divide-by-zero and keeps near-zero multipliers from stretching the interval past 100x the base cooldown.
-        private const float MinimumAttackSpeedMultiplier = 0.01f;
+        // 0.00005 = 20,000 shots/sec theoretical max
+        private const float MinimumFireInterval = 0.00005f;
+
+        // Prevents insane frame hitch explosions
+        private const int MaxShotsPerFrame = 1024;
 
         private Gun gun;
+        private GunAmmo gunAmmo;
+
         private float fireTimer;
 
         private void Awake()
         {
             gun = GetComponent<Gun>();
+            gunAmmo = GetComponent<GunAmmo>();
         }
 
         private void Update()
         {
-            // Match the original effect's left-mouse auto-fire behavior; this component does not have access to a higher-level input abstraction.
-            if (gun == null || !Input.GetMouseButton(0) || gun.isReloading)
+            if (gun == null || !Input.GetMouseButton(0))
             {
                 fireTimer = 0f;
                 return;
             }
 
+            // 🔥 Force gun to always be ready to fire
+            gun.sinceAttack = 999f;
+
             float fireInterval = GetFireInterval();
             fireTimer += Time.deltaTime;
 
             int shotsThisFrame = 0;
+
             while (fireTimer >= fireInterval && shotsThisFrame < MaxShotsPerFrame)
             {
-                // Setting charge=0f fires an instant shot, and forceAttack=true intentionally bypasses Gun.sinceAttack because it only advances once per frame.
-                // fireTimer provides the real rate limit here, so this removes the framerate bottleneck without making the card unbounded.
-                if (!gun.Attack(0f, true))
-                {
-                    fireTimer = 0f;
-                    return;
-                }
+                // Try to fire, but DO NOT early-return if it fails
+                gun.Attack(0f, true);
 
                 fireTimer -= fireInterval;
                 shotsThisFrame++;
@@ -59,12 +59,12 @@ namespace DanModCards.Effects
         private float GetFireInterval()
         {
             if (gun == null)
-            {
                 return MinimumFireInterval;
-            }
 
             float cooldown = gun.lockGunToDefault ? gun.defaultCooldown : gun.attackSpeed;
-            float attackSpeedMultiplier = Mathf.Max(gun.attackSpeedMultiplier, MinimumAttackSpeedMultiplier);
+
+            float attackSpeedMultiplier = Mathf.Max(gun.attackSpeedMultiplier, 0.01f);
+
             return Mathf.Max(cooldown / attackSpeedMultiplier, MinimumFireInterval);
         }
 

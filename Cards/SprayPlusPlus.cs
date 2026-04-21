@@ -18,7 +18,7 @@ namespace DanModCards.Cards
             {
                 positive       = true,
                 stat           = "Attack Speed",
-                amount         = "+3000%",
+                amount         = "+4000%",
                 simepleAmount  = CardInfoStat.SimpleAmount.notAssigned,
             },
             new CardInfoStat
@@ -46,7 +46,7 @@ namespace DanModCards.Cards
             CardInfo cardInfo, Gun gun, ApplyCardStats cardStats,
             CharacterStatModifiers statModifiers, Block block)
         {
-            gun.attackSpeedMultiplier   *= 80f;
+            gun.attackSpeedMultiplier   *= 100f;
             gun.damage                  *= 0.15f;
         }
 
