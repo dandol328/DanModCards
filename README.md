@@ -10,6 +10,7 @@ The project requires the [ROUNDS](https://store.steampowered.com/app/1557740/ROU
 - [.NET SDK 6.0 or later](https://dotnet.microsoft.com/download)
 - ROUNDS installed via Steam
 - [BepInEx 5.x](https://github.com/BepInEx/BepInEx/releases) installed in the ROUNDS game directory
+- [Unbound Lib](https://github.com/Rounds-Modding/UnboundLib) - Unbound lib is what the cards are built off of
 
 ### Windows
 
