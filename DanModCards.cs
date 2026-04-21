@@ -33,6 +33,24 @@ namespace DanModCards
             CustomCard.BuildCard<Landmines>();
             CustomCard.BuildCard<GlassDildo>();
             CustomCard.BuildCard<CantCatchMe>();
+
+            // Adult-themed cards
+            CustomCard.BuildCard<CockAndLoad>();
+            CustomCard.BuildCard<PrematureEjaculator>();
+            CustomCard.BuildCard<BigDickEnergy>();
+            CustomCard.BuildCard<DeepThroat>();
+            CustomCard.BuildCard<BallBuster>();
+            CustomCard.BuildCard<ReverseCowgirl>();
+            CustomCard.BuildCard<TheUnlubedDildo>();
+            CustomCard.BuildCard<CumshotCannon>();
+            CustomCard.BuildCard<PoundingPound>();
+            CustomCard.BuildCard<BallsDeep>();
+            CustomCard.BuildCard<EdgingMaster>();
+            CustomCard.BuildCard<CreampieDeluxe>();
+            CustomCard.BuildCard<ThroatGoatSupreme>();
+            CustomCard.BuildCard<NutBuster9000>();
+            CustomCard.BuildCard<DoublePenetration>();
+            CustomCard.BuildCard<BackdoorBandit>();
         }
     }
 }
