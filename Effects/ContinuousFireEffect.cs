@@ -12,6 +12,7 @@ namespace DanModCards.Effects
         private const float MinimumFireInterval = 0.0005f;
         // Prevents a long frame hitch from spawning an unbounded number of attacks in one Update.
         private const int MaxShotsPerFrame = 256;
+        // Avoids divide-by-zero and keeps near-zero multipliers from stretching the interval past 100x the base cooldown.
         private const float MinimumAttackSpeedMultiplier = 0.01f;
 
         private Gun gun;
@@ -38,7 +39,7 @@ namespace DanModCards.Effects
             while (fireTimer >= fireInterval && shotsThisFrame < MaxShotsPerFrame)
             {
                 // Setting charge=0f fires an instant shot, and forceAttack=true intentionally bypasses Gun.sinceAttack because it only advances once per frame.
-                // fireTimer provides the real rate limit here, so this removes the frame-rate bottleneck without making the card unbounded.
+                // fireTimer provides the real rate limit here, so this removes the framerate bottleneck without making the card unbounded.
                 if (!gun.Attack(0f, true))
                 {
                     fireTimer = 0f;
