@@ -57,7 +57,7 @@ namespace DanModCards.Cards
             HealthHandler health, Gravity gravity, Block block,
             CharacterStatModifiers characterStats)
         {
-            player.gameObject.GetOrAddComponent<InfinityMirrorEffect>();
+            gun.gameObject.GetOrAddComponent<InfinityMirrorEffect>();
         }
 
         public override void OnRemoveCard(
@@ -65,7 +65,7 @@ namespace DanModCards.Cards
             HealthHandler health, Gravity gravity, Block block,
             CharacterStatModifiers characterStats)
         {
-            var effect = player.gameObject.GetComponent<InfinityMirrorEffect>();
+            var effect = gun.gameObject.GetComponent<InfinityMirrorEffect>();
             if (effect != null)
             {
                 Destroy(effect);
