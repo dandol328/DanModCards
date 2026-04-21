@@ -4,40 +4,33 @@ using UnityEngine;
 namespace DanModCards.Cards
 {
     /// <summary>
-    /// Mega Tank – drastically boosts health and gravity at the cost of movement speed.
+    /// Glass Dildo – reduces health to 1 but grants an enormous damage bonus.
     /// </summary>
-    public class MegaTank : CustomCard
+    public class GlassDildo : CustomCard
     {
-        protected override string GetTitle()       => "Mega Tank";
-        protected override string GetDescription() => "Become an unstoppable wall of health. You're nearly impossible to kill – just don't expect to move quickly.";
+        protected override string GetTitle()       => "Glass Dildo";
+        protected override string GetDescription() => "You shatter at the slightest touch, but your weapon hits like a freight train.";
 
         protected override CardInfoStat[] GetStats() => new[]
         {
             new CardInfoStat
             {
-                positive       = true,
+                positive       = false,
                 stat           = "Health",
-                amount         = "+300%",
+                amount         = "-99%",
                 simepleAmount  = CardInfoStat.SimpleAmount.notAssigned,
             },
             new CardInfoStat
             {
-                positive       = false,
-                stat           = "Character Gravity",
-                amount         = "+30%",
-                simepleAmount  = CardInfoStat.SimpleAmount.notAssigned,
-            },
-            new CardInfoStat
-            {
-                positive       = false,
-                stat           = "Movement Speed",
-                amount         = "-50%",
+                positive       = true,
+                stat           = "Damage",
+                amount         = "+1000%",
                 simepleAmount  = CardInfoStat.SimpleAmount.notAssigned,
             },
         };
 
         protected override CardInfo.Rarity GetRarity()                          => CardInfo.Rarity.Rare;
-        protected override CardThemeColor.CardThemeColorType GetTheme()         => CardThemeColor.CardThemeColorType.TechWhite;
+        protected override CardThemeColor.CardThemeColorType GetTheme()         => CardThemeColor.CardThemeColorType.DestructiveRed;
         protected override GameObject GetCardArt()                              => null;
         public override string GetModName()                                     => DanModCards.ModInitials;
 
@@ -45,9 +38,8 @@ namespace DanModCards.Cards
             CardInfo cardInfo, Gun gun, ApplyCardStats cardStats,
             CharacterStatModifiers statModifiers, Block block)
         {
-            statModifiers.health        *= 4.0f;
-            statModifiers.gravity       *= 1.3f;
-            statModifiers.movementSpeed *= 0.5f;
+            statModifiers.health *= 0.01f;
+            gun.damage           *= 11.0f;
         }
 
         public override void OnAddCard(

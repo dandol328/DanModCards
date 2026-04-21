@@ -4,39 +4,25 @@ using UnityEngine;
 namespace DanModCards.Cards
 {
     /// <summary>
-    /// Mega Tank – drastically boosts health and gravity at the cost of movement speed.
+    /// Can't Catch Me – massively boosts movement speed.
     /// </summary>
-    public class MegaTank : CustomCard
+    public class CantCatchMe : CustomCard
     {
-        protected override string GetTitle()       => "Mega Tank";
-        protected override string GetDescription() => "Become an unstoppable wall of health. You're nearly impossible to kill – just don't expect to move quickly.";
+        protected override string GetTitle()       => "Can't Catch Me";
+        protected override string GetDescription() => "You're a blur. Nobody can catch you now.";
 
         protected override CardInfoStat[] GetStats() => new[]
         {
             new CardInfoStat
             {
                 positive       = true,
-                stat           = "Health",
-                amount         = "+300%",
-                simepleAmount  = CardInfoStat.SimpleAmount.notAssigned,
-            },
-            new CardInfoStat
-            {
-                positive       = false,
-                stat           = "Character Gravity",
-                amount         = "+30%",
-                simepleAmount  = CardInfoStat.SimpleAmount.notAssigned,
-            },
-            new CardInfoStat
-            {
-                positive       = false,
                 stat           = "Movement Speed",
-                amount         = "-50%",
+                amount         = "+200%",
                 simepleAmount  = CardInfoStat.SimpleAmount.notAssigned,
             },
         };
 
-        protected override CardInfo.Rarity GetRarity()                          => CardInfo.Rarity.Rare;
+        protected override CardInfo.Rarity GetRarity()                          => CardInfo.Rarity.Uncommon;
         protected override CardThemeColor.CardThemeColorType GetTheme()         => CardThemeColor.CardThemeColorType.TechWhite;
         protected override GameObject GetCardArt()                              => null;
         public override string GetModName()                                     => DanModCards.ModInitials;
@@ -45,9 +31,7 @@ namespace DanModCards.Cards
             CardInfo cardInfo, Gun gun, ApplyCardStats cardStats,
             CharacterStatModifiers statModifiers, Block block)
         {
-            statModifiers.health        *= 4.0f;
-            statModifiers.gravity       *= 1.3f;
-            statModifiers.movementSpeed *= 0.5f;
+            statModifiers.movementSpeed *= 3.0f;
         }
 
         public override void OnAddCard(
