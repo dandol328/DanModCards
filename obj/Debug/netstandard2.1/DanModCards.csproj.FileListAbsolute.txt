@@ -1,5 +1,0 @@
-/home/runner/work/DanModCards/DanModCards/obj/Debug/netstandard2.1/DanModCards.GeneratedMSBuildEditorConfig.editorconfig
-/home/runner/work/DanModCards/DanModCards/obj/Debug/netstandard2.1/DanModCards.AssemblyInfoInputs.cache
-/home/runner/work/DanModCards/DanModCards/obj/Debug/netstandard2.1/DanModCards.AssemblyInfo.cs
-/home/runner/work/DanModCards/DanModCards/obj/Debug/netstandard2.1/DanModCards.csproj.CoreCompileInputs.cache
-/home/runner/work/DanModCards/DanModCards/obj/Debug/netstandard2.1/DanModCards.sourcelink.json
