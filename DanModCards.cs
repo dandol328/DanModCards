@@ -31,6 +31,8 @@ namespace DanModCards
             CustomCard.BuildCard<RailCannon>();
             CustomCard.BuildCard<MegaTank>();
             CustomCard.BuildCard<Landmines>();
+            CustomCard.BuildCard<GlassDildo>();
+            CustomCard.BuildCard<CantCatchMe>();
         }
     }
 }
