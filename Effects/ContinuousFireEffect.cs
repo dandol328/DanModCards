@@ -24,6 +24,7 @@ namespace DanModCards.Effects
 
         private void Update()
         {
+            // Match the original effect's left-mouse auto-fire behavior; this component does not have access to a higher-level input abstraction.
             if (gun == null || !Input.GetMouseButton(0) || gun.isReloading)
             {
                 fireTimer = 0f;
@@ -36,10 +37,11 @@ namespace DanModCards.Effects
             int shotsThisFrame = 0;
             while (fireTimer >= fireInterval && shotsThisFrame < MaxShotsPerFrame)
             {
-                // Setting charge=0f fires an instant shot, and forceAttack=true bypasses Gun.sinceAttack because it only advances once per frame.
+                // Setting charge=0f fires an instant shot, and forceAttack=true intentionally bypasses Gun.sinceAttack because it only advances once per frame.
+                // fireTimer provides the real rate limit here, so this removes the frame-rate bottleneck without making the card unbounded.
                 if (!gun.Attack(0f, true))
                 {
-                    fireTimer = Mathf.Min(fireTimer, fireInterval);
+                    fireTimer = 0f;
                     return;
                 }
 
