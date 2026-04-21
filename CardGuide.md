@@ -40,9 +40,9 @@ Become an unstoppable wall of health. You're nearly impossible to kill – just 
 - **Stats:** Health +300%, Character Gravity +30%, Movement Speed -50%
 
 ### 8. **Landmines**
-Bullets drop straight to the ground and detonate for massive damage. Fire and jump away!
+Fires a huge, lumbering bullet that drifts through walls and can't be blocked. It bounces 7 times and lingers for 30 seconds – a roaming landmine. Don't stand still.
 - **Rarity:** Rare
-- **Stats:** Bullet Gravity +1500%, Bullet Speed -75%, Damage +400%
+- **Stats:** Damage +400%, Bullet Speed -90%, Bullet Gravity -90%, Smart Bounces +7, Bullet Lifetime 30s, Ignores Walls, Unblockable
 
 ### 9. **Glass Dildo**
 You shatter at the slightest touch, but your weapon hits like a freight train.
