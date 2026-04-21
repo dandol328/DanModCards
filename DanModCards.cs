@@ -25,6 +25,7 @@ namespace DanModCards
         {
             CustomCard.BuildCard<ZoomiesBurst>();
             CustomCard.BuildCard<VictorsMeow>();
+            CustomCard.BuildCard<AntiGravity>();
         }
     }
 }
