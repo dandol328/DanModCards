@@ -24,7 +24,7 @@ namespace DanModCards.Cards
             {
                 positive       = false,
                 stat           = "Character Gravity",
-                amount         = "+50%",
+                amount         = "+30%",
                 simepleAmount  = CardInfoStat.SimpleAmount.notAssigned,
             },
             new CardInfoStat
@@ -46,7 +46,7 @@ namespace DanModCards.Cards
             CharacterStatModifiers statModifiers, Block block)
         {
             statModifiers.health        *= 6.0f;
-            statModifiers.gravity       *= 1.5f;
+            statModifiers.gravity       *= 1.3f;
             statModifiers.movementSpeed *= 0.5f;
         }
 
