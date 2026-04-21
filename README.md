@@ -1,5 +1,6 @@
 # DanModCards
 Dan &amp; Friends stupid pack of Rounds Cards.
+Uses [UnboundLib](https://github.com/Rounds-Modding/UnboundLib) for custom cards.
 
 ## Building
 
