@@ -21,7 +21,7 @@ namespace DanModCards.Cards
         protected override CardThemeColor.CardThemeColorType GetTheme() => CardThemeColor.CardThemeColorType.EvilPurple;
         protected override GameObject GetCardArt() => null;
 
-        public override string GetModName() => "DanModCards";
+        public override string GetModName() => "DMC";
 
         public override void OnAddCard(
             Player player,
