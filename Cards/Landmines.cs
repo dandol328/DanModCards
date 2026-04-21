@@ -17,14 +17,14 @@ namespace DanModCards.Cards
             {
                 positive       = false,
                 stat           = "Bullet Gravity",
-                amount         = "-100%",
+                amount         = "+1500%",
                 simepleAmount  = CardInfoStat.SimpleAmount.notAssigned,
             },
             new CardInfoStat
             {
                 positive       = false,
                 stat           = "Bullet Speed",
-                amount         = "-80%",
+                amount         = "-75%",
                 simepleAmount  = CardInfoStat.SimpleAmount.notAssigned,
             },
             new CardInfoStat
@@ -45,9 +45,9 @@ namespace DanModCards.Cards
             CardInfo cardInfo, Gun gun, ApplyCardStats cardStats,
             CharacterStatModifiers statModifiers, Block block)
         {
-            gun.gravity          *= 0.0f;
-            gun.projectileSpeed  *= 0.2f;
-            gun.damage           *= 5.0f;
+            gun.gravity         *= 15.0f;  // Very high downward pull – bullets drop immediately
+            gun.projectileSpeed *= 0.25f;  // Slow speed keeps bullets close but clears player hitbox
+            gun.damage          *= 5.0f;
         }
 
         public override void OnAddCard(

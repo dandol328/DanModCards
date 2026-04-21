@@ -21,8 +21,6 @@ Use this checklist to manually test every card and verify it works correctly.
 | Landmines | - [ ] |
 | MegaTank | - [ ] |
 | NutBuster9000 | - [ ] |
-| PoundingPound | - [ ] |
-| PrematureEjaculator | - [ ] |
 | RailCannon | - [ ] |
 | ReverseCowgirl | - [ ] |
 | SprayPlusPlus | - [ ] |

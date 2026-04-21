@@ -1,4 +1,4 @@
-using UnboundLib;
+using DanModCards.Effects;
 using UnboundLib.Cards;
 using UnityEngine;
 
@@ -9,6 +9,8 @@ namespace DanModCards.Cards
     /// </summary>
     public class DeepThroat : CustomCard
     {
+        private const int PierceAmount = 4;
+
         protected override string GetTitle()       => "Deep Throat";
         protected override string GetDescription() =>
             "Swallow those bullets whole. Insane speed and pierce, but your aim gets a little sloppy at the end.";
@@ -56,7 +58,7 @@ namespace DanModCards.Cards
             HealthHandler health, Gravity gravity, Block block,
             CharacterStatModifiers characterStats)
         {
-            gun.SetFieldValue("pierce", (int)gun.GetFieldValue("pierce") + 4);
+            gun.gameObject.AddComponent<PierceEffect>().PierceCount = PierceAmount;
         }
 
         public override void OnRemoveCard(
@@ -64,7 +66,14 @@ namespace DanModCards.Cards
             HealthHandler health, Gravity gravity, Block block,
             CharacterStatModifiers characterStats)
         {
-            gun.SetFieldValue("pierce", (int)gun.GetFieldValue("pierce") - 4);
+            foreach (var effect in gun.gameObject.GetComponents<PierceEffect>())
+            {
+                if (effect.PierceCount == PierceAmount)
+                {
+                    Destroy(effect);
+                    break;
+                }
+            }
         }
     }
 }

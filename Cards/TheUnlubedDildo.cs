@@ -1,20 +1,16 @@
-using DanModCards.Effects;
 using UnboundLib.Cards;
 using UnityEngine;
 
 namespace DanModCards.Cards
 {
     /// <summary>
-    /// The Unlubed Dildo – raw, brutal stats across the board, but hurts you just as much.
+    /// The Unlubed Dildo – raw, brutal stats across the board, no mercy.
     /// </summary>
     public class TheUnlubedDildo : CustomCard
     {
-        private const float SelfDmgPercent = 0.40f;
-
         protected override string GetTitle()       => "The Unlubed Dildo";
         protected override string GetDescription() =>
-            "No lube. No mercy. It hurts so good going in… and so bad coming back out. " +
-            "Raw, brutal penetration for everyone involved.";
+            "No lube. No mercy. Raw, brutal penetration. It hurts everyone except you.";
 
         protected override CardInfoStat[] GetStats() => new[]
         {
@@ -30,13 +26,6 @@ namespace DanModCards.Cards
                 positive      = true,
                 stat          = "Bullet Speed",
                 amount        = "+250%",
-                simepleAmount = CardInfoStat.SimpleAmount.notAssigned,
-            },
-            new CardInfoStat
-            {
-                positive      = false,
-                stat          = "Self Damage on Fire",
-                amount        = "40%",
                 simepleAmount = CardInfoStat.SimpleAmount.notAssigned,
             },
             new CardInfoStat
@@ -75,7 +64,6 @@ namespace DanModCards.Cards
             HealthHandler health, Gravity gravity, Block block,
             CharacterStatModifiers characterStats)
         {
-            gun.gameObject.AddComponent<SelfDamageOnFireEffect>().DamagePercent = SelfDmgPercent;
         }
 
         public override void OnRemoveCard(
@@ -83,14 +71,6 @@ namespace DanModCards.Cards
             HealthHandler health, Gravity gravity, Block block,
             CharacterStatModifiers characterStats)
         {
-            foreach (var effect in gun.gameObject.GetComponents<SelfDamageOnFireEffect>())
-            {
-                if (Mathf.Approximately(effect.DamagePercent, SelfDmgPercent))
-                {
-                    Destroy(effect);
-                    break;
-                }
-            }
         }
     }
 }

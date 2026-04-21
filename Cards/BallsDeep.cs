@@ -1,4 +1,4 @@
-using UnboundLib;
+using DanModCards.Effects;
 using UnboundLib.Cards;
 using UnityEngine;
 
@@ -9,6 +9,8 @@ namespace DanModCards.Cards
     /// </summary>
     public class BallsDeep : CustomCard
     {
+        private const int PierceAmount = 8;
+
         protected override string GetTitle()       => "Balls Deep";
         protected override string GetDescription() =>
             "Go all the way in. Bullets travel forever and pierce through everything… " +
@@ -65,7 +67,7 @@ namespace DanModCards.Cards
             HealthHandler health, Gravity gravity, Block block,
             CharacterStatModifiers characterStats)
         {
-            gun.SetFieldValue("pierce", (int)gun.GetFieldValue("pierce") + 8);
+            gun.gameObject.AddComponent<PierceEffect>().PierceCount = PierceAmount;
         }
 
         public override void OnRemoveCard(
@@ -73,7 +75,14 @@ namespace DanModCards.Cards
             HealthHandler health, Gravity gravity, Block block,
             CharacterStatModifiers characterStats)
         {
-            gun.SetFieldValue("pierce", (int)gun.GetFieldValue("pierce") - 8);
+            foreach (var effect in gun.gameObject.GetComponents<PierceEffect>())
+            {
+                if (effect.PierceCount == PierceAmount)
+                {
+                    Destroy(effect);
+                    break;
+                }
+            }
         }
     }
 }
